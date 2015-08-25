@@ -1,0 +1,7 @@
+- name: Check if docker-compose is already present
+  stat:
+    path: "{{ docker_compose_bin }}"
+  register: docker_compose
+
+- include: install.yml
+  when: not docker_compose.stat.exists

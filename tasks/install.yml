@@ -1,0 +1,15 @@
+- name: Ensure curl is installed
+  apt:
+    pkg: curl
+    state: present
+
+- name: Install docker-compose
+  shell: curl -L https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-`uname -s`-`uname -m` > {{ docker_compose_bin }}
+
+- name: Setting permissions
+  file:
+    path: "{{ docker_compose_bin }}"
+    group: root
+    owner: root
+    mode: 0755
+
